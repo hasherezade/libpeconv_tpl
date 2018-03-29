@@ -1,20 +1,44 @@
 cmake_minimum_required (VERSION 2.8)
 
+# replace "peconv_project" by your own project name:
 project (peconv_project)
+
+# This option allows you to choose if you want to build a DLL or EXE:
+option(BUILD_AS_DLL "Build the project as a DLL" OFF)
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
 
-#include libpeconv headers:
+# include libpeconv headers:
 include_directories ( ${PECONV_DIR}/include )
 
 set (srcs
-	main.cpp
+#put your sources here
 )
 
+# general headers - they will be used for both EXE and DLL:
 set (hdrs
+#put your headers here
 )
 
-add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} )
+# DLL-specific headers - they will be included only in the DLL build:
+set (dll_hdrs
+#put your headers here
+)
+
+# Choose to build the DLL or EXE
+
+if(BUILD_AS_DLL)
+	include_directories (
+		include
+	)
+	set (dll_hdrs
+		${hdrs}
+		include/api.h
+	)
+	add_library ( ${PROJECT_NAME} SHARED ${dll_hdrs} ${srcs} dll_main.cpp main.def)
+else()
+	add_executable ( ${PROJECT_NAME} ${exe_hdrs} ${srcs} main.cpp )
+endif()
 
 # link with libpeconv.lib
 target_link_libraries ( ${PROJECT_NAME} ${PECONV_LIB} )
