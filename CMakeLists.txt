@@ -14,5 +14,5 @@ set ( PECONV_LIB $<TARGET_FILE:libpeconv> CACHE FILE "PEConvLib library path" )
 
 # Add sub-directories
 #
-add_subdirectory ( peconv_project )
+add_subdirectory ( project_template )
 
