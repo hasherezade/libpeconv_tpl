@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 
-project ( ${PROJECT_NAME} )
+# replace "peconv_template" by your own project name:
+project ( project_template )
 
 # This option allows you to choose if you want to build a DLL or EXE:
 option(BUILD_AS_DLL "Build the project as a DLL" OFF)
@@ -46,3 +47,6 @@ endif()
 
 # link with libpeconv.lib
 target_link_libraries ( ${PROJECT_NAME} ${PECONV_LIB} )
+
+#dependencies:
+add_dependencies( ${PROJECT_NAME} libpeconv )

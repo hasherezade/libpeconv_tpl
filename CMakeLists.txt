@@ -16,5 +16,3 @@ set ( PECONV_LIB $<TARGET_FILE:libpeconv> CACHE FILE "PEConvLib library path" )
 #
 add_subdirectory ( peconv_project )
 
-#dependencies:
-add_dependencies( ${PROJECT_NAME} libpeconv )
