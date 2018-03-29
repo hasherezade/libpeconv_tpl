@@ -1,2 +1,1 @@
-LIBRARY TemplateDLL
 EXPORTS demo_export
