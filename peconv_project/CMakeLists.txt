@@ -20,6 +20,11 @@ set (hdrs
 #put your headers here
 )
 
+set (rsrc
+#put your resources here
+)
+
+
 # DLL-specific headers - they will be included only in the DLL build:
 set (dll_hdrs
 #put your headers here
@@ -35,9 +40,9 @@ if(BUILD_AS_DLL)
 		${hdrs}
 		include/api.h
 	)
-	add_library ( ${PROJECT_NAME} SHARED ${dll_hdrs} ${srcs} dll_main.cpp main.def)
+	add_library ( ${PROJECT_NAME} SHARED ${dll_hdrs} ${srcs} ${rsrc} dll_main.cpp main.def)
 else()
-	add_executable ( ${PROJECT_NAME} ${exe_hdrs} ${srcs} main.cpp )
+	add_executable ( ${PROJECT_NAME} ${exe_hdrs} ${srcs} ${rsrc} main.cpp )
 endif()
 
 # link with libpeconv.lib
