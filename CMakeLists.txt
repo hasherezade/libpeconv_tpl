@@ -1,5 +1,6 @@
 cmake_minimum_required ( VERSION 2.8 )
 
+# replace "peconv_project" by your own project name:
 project ( peconv_project )
 
 # libs
@@ -16,4 +17,4 @@ set ( PECONV_LIB $<TARGET_FILE:libpeconv> CACHE FILE "PEConvLib library path" )
 add_subdirectory ( peconv_project )
 
 #dependencies:
-add_dependencies( peconv_project libpeconv )
+add_dependencies( ${PROJECT_NAME} libpeconv )

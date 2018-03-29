@@ -1,7 +1,6 @@
 cmake_minimum_required (VERSION 2.8)
 
-# replace "peconv_project" by your own project name:
-project (peconv_project)
+project ( ${PROJECT_NAME} )
 
 # This option allows you to choose if you want to build a DLL or EXE:
 option(BUILD_AS_DLL "Build the project as a DLL" OFF)
