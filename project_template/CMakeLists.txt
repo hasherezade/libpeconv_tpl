@@ -42,7 +42,7 @@ if(BUILD_AS_DLL)
 	)
 	add_library ( ${PROJECT_NAME} SHARED ${dll_hdrs} ${srcs} ${rsrc} dll_main.cpp main.def)
 else()
-	add_executable ( ${PROJECT_NAME} ${exe_hdrs} ${srcs} ${rsrc} main.cpp )
+	add_executable ( ${PROJECT_NAME} ${hdrs} ${srcs} ${rsrc} main.cpp )
 endif()
 
 # link with libpeconv.lib
