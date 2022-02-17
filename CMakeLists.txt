@@ -1,7 +1,8 @@
-cmake_minimum_required ( VERSION 2.8 )
+cmake_minimum_required ( VERSION 3.0 )
 
 # replace "peconv_project" by your own project name:
 project ( peconv_project )
+
 
 # libs
 # modules:
