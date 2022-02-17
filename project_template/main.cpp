@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <iostream>
+#include <tchar.h>
 
 #include <peconv.h> // include libPeConv header
 
@@ -7,7 +8,7 @@
 A demo of a basic manual PE loader - you can use it as a starting point for your own project,
 or delete it and start from the scratch
 */
-int load_and_run(LPCSTR pe_path)
+int load_and_run(LPCTSTR pe_path)
 {
 	// manually load the PE file using libPeConv:
 	size_t v_size = 0;
@@ -41,12 +42,12 @@ int load_and_run(LPCSTR pe_path)
 	return new_main();
 }
 
-int main(int argc, char *argv[])
+int _tmain(int argc, LPTSTR argv[])
 {
 	if (argc < 2) {
 		std::cout << "Args: <path to the exe>" << std::endl;
 		return 0;
 	}
-	const LPCSTR pe_path = argv[1];
+	const LPTSTR pe_path = argv[1];
 	return load_and_run(pe_path);
 }
