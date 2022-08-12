@@ -27,25 +27,27 @@ bool load_payload(LPCTSTR pe_path)
 	*/
 	size_t bufsize = 0;
 	BYTE* buf = peconv::load_file(pe_path, bufsize);
-	if (buf) {
-		// if the file is NOT dropped on the disk, you can load it directly from a memory buffer:
-		g_Payload = peconv::load_pe_executable(buf, bufsize, g_PayloadSize);
-
-		// if the loaded PE needs to access resources, you may need to connect it to the PEB:
-		peconv::set_main_module_in_peb((HMODULE)g_Payload);
-
-		// load delayed imports (if present):
-		const ULONGLONG loadBase = (ULONGLONG)g_Payload;
-		peconv::load_delayed_imports(g_Payload, loadBase);
-
-		// at this point we can free the buffer with the raw payload:
-		peconv::free_file(buf); buf = nullptr;
-
-		if (!g_Payload) {
-			return false;
-		}
+	if (!buf) {
+		return false;
 	}
+	// if the file is NOT dropped on the disk, you can load it directly from a memory buffer:
+	g_Payload = peconv::load_pe_executable(buf, bufsize, g_PayloadSize);
+
+	// at this point we can free the buffer with the raw payload:
+	peconv::free_file(buf); buf = nullptr;
+	
 #endif
+	if (!g_Payload) {
+		return false;
+	}
+
+	// if the loaded PE needs to access resources, you may need to connect it to the PEB:
+	peconv::set_main_module_in_peb((HMODULE)g_Payload);
+
+	// load delayed imports (if present):
+	const ULONGLONG loadBase = (ULONGLONG)g_Payload;
+	peconv::load_delayed_imports(g_Payload, loadBase);
+
 	return true;
 }
 
