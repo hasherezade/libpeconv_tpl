@@ -31,6 +31,13 @@ bool load_payload(LPCTSTR pe_path)
 		// if the file is NOT dropped on the disk, you can load it directly from a memory buffer:
 		g_Payload = peconv::load_pe_executable(buf, bufsize, g_PayloadSize);
 
+		// if the loaded PE needs to access resources, you may need to connect it to the PEB:
+		peconv::set_main_module_in_peb((HMODULE)g_Payload);
+
+		// load delayed imports (if present):
+		const ULONGLONG loadBase = (ULONGLONG)g_Payload;
+		peconv::load_delayed_imports(g_Payload, loadBase);
+
 		// at this point we can free the buffer with the raw payload:
 		peconv::free_file(buf); buf = nullptr;
 
@@ -48,8 +55,6 @@ int run_payload()
 		std::cerr << "[!] The payload is not loaded!\n";
 		return -1;
 	}
-	// if the loaded PE needs to access resources, you may need to connect it to the PEB:
-	peconv::set_main_module_in_peb((HMODULE)g_Payload);
 
 	// if needed, you can run TLS callbacks before the Entry Point:
 	peconv::run_tls_callbacks(g_Payload, g_PayloadSize);
