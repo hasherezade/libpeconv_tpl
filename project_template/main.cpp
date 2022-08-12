@@ -15,8 +15,11 @@ size_t g_PayloadSize = 0;
 // manually load the PE file using libPeConv
 bool load_payload(LPCTSTR pe_path)
 {
-	// manually load the PE file using libPeConv:
-	size_t g_PayloadSize = 0;
+	if (g_Payload) {
+		// already loaded
+		std::cerr << "[!] The payload is already loaded!\n";
+		return false;
+	}
 #ifdef LOAD_FROM_PATH
 	//if the PE is dropped on the disk, you can load it from the file:
 	g_Payload = peconv::load_pe_executable(pe_path, g_PayloadSize);
