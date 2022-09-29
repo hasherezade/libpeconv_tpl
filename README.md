@@ -4,9 +4,13 @@
 
 A ready-made template for a project based on [libpeconv](https://github.com/hasherezade/libpeconv).
 
-Clone:
+Clone & build
 -
-Use recursive clone to get the repo together with all the submodules:
+
+1. Use [Git](https://git-scm.com/download/) to make a **recursive** clone of this repo, containing all the required submodules:
+
 ```console
 git clone --recursive https://github.com/hasherezade/libpeconv_tpl.git
 ```
+
+2. With the help of [CMake](https://cmake.org/), generate a Visual Studio project, analogously to described [here](https://github.com/hasherezade/libpeconv/wiki/Building-the-library).
